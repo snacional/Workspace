@@ -7,28 +7,6 @@
         h1{
             font-weight: bolder;
         }
-        #message {
-  display:none;
-  background: #f1f1f1;
-  color: #000;
-  position: absolute;
-  height: 50px;
-}
-#message p {
-padding: 10px 35px;
-  font-size: 18px;
-}
-#age {
-  display:none;
-  background: #f1f1f1;
-  color: #000;
-  position: absolute;
-  height: 50px;
-}
-#age p {
-padding: 10px 35px;
-  font-size: 18px;
-}
 .container {
   background-color: #f1f1f1;
   padding: 20px;
@@ -95,6 +73,7 @@ padding: 10px 35px;
   margin-bottom: 16px;
         }
     .invalid {
+      display: none;
   color: red;
 }
 
@@ -113,6 +92,7 @@ padding: 10px 35px;
   content: "✔";
 }
 .red {
+  display: none;
   color: red;
 }
 
@@ -145,16 +125,12 @@ padding: 10px 35px;
                 <input type="text" class="input" name="nickname"/><br/>
                 Password:
                 <input type="password" id="password" class="input" name="password" value="" required><br/>
-                <div id="message">
                     <p id="length" class="invalid">Password must be at least 8 characters.</b></p>
-            </div>
                 Email:         <br/>
                 <input type="email" class="input" name="email"/><br/>
                 Date of Birth: <br/>
                 <input type="date" class="date" id="date" name="bday"/>
-                <div id="age">
-                  <p id="dateage" class="red">Minors are not allowed!</p>  
-                </div>
+                  <p id="dateage" class="red">Minors are not allowed!</p><br/>
                 Gender:        <br/>
                 <input type="radio" class="dot" name="gender" value="gender"/> Male
                 <input type="radio" class="dot" name="gender" value="gender"/> Female
@@ -169,15 +145,14 @@ padding: 10px 35px;
         </div>
         
         <script>
-            var date = document.getElementById("date");
-            preventDefault();
+var date = document.getElementById("date");
  var psw = document.getElementById("password");
  var length = document.getElementById("length");
 psw.onfocus = function() {
-  document.getElementById("message").style.display = "block";
+  document.getElementById("length").style.display = "block";
 }
 psw.onblur = function() {
-  document.getElementById("message").style.display = "none";
+  document.getElementById("length").style.display = "none";
 }
 psw.onkeyup = function() {
     
@@ -186,24 +161,24 @@ psw.onkeyup = function() {
     length.classList.add("valid");
   } else {
     length.classList.remove("valid");
-    length.classList.add("invalid");
+    length.classList.add("invalid");d
   }
 }
 date.onfocus = function() {
-  document.getElementById("age").style.display = "block";
+  document.getElementById("dateage").style.display = "block";
 }
 date.onblur = function() {
-  document.getElementById("age").style.display = "none";
+  document.getElementById("dateage").style.display = "none";
 }
   function calculateAge(birthDate) {
-  const date = new Date();
-  const currentYear = date.getFullYear();
+  const currentDate = new Date();
+  const currentYear =currentDate.getFullYear();
   const birthYear = new Date(birthDate).getFullYear();
   const age = currentYear - birthYear;
   return age;
 }
   date.checkAge = function() {   
-    const age = calculateAge(date);  
+    var age = calculateAge(date);  
 			if (age > 20) {
             dateage.classList.remove("red");
             dateage.classList.add("green");
