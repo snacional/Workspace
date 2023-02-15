@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <style>
+        h1{
+            font-weight: bolder;
+        }
+        #message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: absolute;
+  height: 50px;
+}
+#message p {
+padding: 10px 35px;
+  font-size: 18px;
+}
+#age {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: absolute;
+  height: 50px;
+}
+#age p {
+padding: 10px 35px;
+  font-size: 18px;
+}
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+        form{
+            
+            font-weight: 400;
+        }
+        body{
+            background-color: black;
+        }
+        div{
+            background-color: white;
+            width: 400px;
+            height: 1050px;
+            padding: 20px 20px 20px 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+        .input{
+            width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+        }
+        .GreenButton{
+            width: 100px;
+            height: 25px;
+            background-color: green;
+            color: white;
+            border: 0;
+        }
+        .RedButton{
+            width: 100px;
+            height: 25px;
+            background-color: red;
+            color: white;
+            border: 0;
+        }
+        .dot{
+            margin: 10px 10px 10px 10px;
+        }
+       
+        .add{
+            width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+            
+        }
+        .date{
+            width: 35%;
+            box-sizing: border-box;
+            padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+        }
+    .invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+.red {
+  color: red;
+}
+
+.red:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+.green {
+  color: green;
+}
+
+.green:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+    </style>
+    <body>
+        <div>
+            <form name="Form" onsubmit="return validate()" method="post">
+                <h1>Registration Form</h1>
+                <br/>
+                <br/>
+                First Name:    <br/>
+                <input type="text" class="input" name="firstname"/><br/>
+                Last Name:     <br/>
+                <input type="text" class="input" name="lastname"/><br/>
+                Nick Name:     <br/>
+                <input type="text" class="input" name="nickname"/><br/>
+                Password:
+                <input type="password" id="password" class="input" name="password" value="" required><br/>
+                <div id="message">
+                    <p id="length" class="invalid">Password must be at least 8 characters.</b></p>
+            </div>
+                Email:         <br/>
+                <input type="email" class="input" name="email"/><br/>
+                Date of Birth: <br/>
+                <input type="date" class="date" id="date" name="bday"/>
+                <div id="age">
+                  <p id="dateage" class="red">Minors are not allowed!</p>  
+                </div>
+                Gender:        <br/>
+                <input type="radio" class="dot" name="gender" value="gender"/> Male
+                <input type="radio" class="dot" name="gender" value="gender"/> Female
+                <input type="radio" class="dot" name="gender" value="gender"/> Other <br/>
+                Mobile:        <br/>
+                <input type="number" class="input" name="mobile" placeholder="+63"><br/>
+                Address:       <br/>
+                <textarea type="address" class="add" value="address" cols="30" rows="10"></textarea><br/>
+                <input type="submit" class="GreenButton" name="submit" value="Submit">
+                <input type="reset" class="RedButton" name="reset" value="Reset"><br/>
+            </form>
+        </div>
+        
+        <script>
+            var date = document.getElementById("date");
+            preventDefault();
+ var psw = document.getElementById("password");
+ var length = document.getElementById("length");
+psw.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+psw.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+psw.onkeyup = function() {
+    
+    if(psw.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+date.onfocus = function() {
+  document.getElementById("age").style.display = "block";
+}
+date.onblur = function() {
+  document.getElementById("age").style.display = "none";
+}
+  function calculateAge(birthDate) {
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const birthYear = new Date(birthDate).getFullYear();
+  const age = currentYear - birthYear;
+  return age;
+}
+  date.checkAge = function() {   
+    const age = calculateAge(date);  
+			if (age > 20) {
+            dateage.classList.remove("red");
+            dateage.classList.add("green");
+            } else {
+            dateage.classList.remove("red");
+            dateage.classList.add("green");
+            }
+		}
+  
+
+        </script>
+        </body>
+        </html>
